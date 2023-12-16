@@ -25,7 +25,7 @@ typedef struct {
 #define MAINC_DEFAULT_FONT_HEIGHT 6
 #define MAINC_DEFAULT_FONT_WIDTH 6
 
-static char olivec_default_glyphs[128][MAINC_DEFAULT_FONT_HEIGHT][MAINC_DEFAULT_FONT_WIDTH] = {
+static char mainc_default_glyphs[128][MAINC_DEFAULT_FONT_HEIGHT][MAINC_DEFAULT_FONT_WIDTH] = {
     ['a'] = {
         {0, 0, 0, 0, 0},
         {0, 1, 1, 0, 0},
@@ -286,5 +286,21 @@ static char olivec_default_glyphs[128][MAINC_DEFAULT_FONT_HEIGHT][MAINC_DEFAULT_
         {0, 0, 0, 0, 0},
     },
 };
+
+static Mainc_Font mainc_default_font = {
+    .glyphs = &mainc_default_glyphs[0][0][0],
+    .width = MAINC_DEFAULT_FONT_WIDTH,
+    .height = MAINC_DEFAULT_FONT_HEIGHT,
+};
+
+typedef struct {
+    uint32_t *pixels;
+    size_t width;
+    size_t height;
+    size_t stride;
+} Mainc_Canvas;
+
+#define MAINC_CANVAS_NULL ((Mainc_Canvas) {0})
+#define MAINC_PIXEL(oc, x ,y) (oc).pixels[(y) * (oc).stride + (x)]
 
 #endif
